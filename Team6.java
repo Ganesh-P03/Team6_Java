@@ -2,11 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-interface PersonalInfo{
-    void setMobileNo(int x);
-}
 
-class Vehicle implements PersonalInfo{
+
+class Person {
  
     String vehicleNo;
     String uid;
@@ -19,141 +17,108 @@ class Vehicle implements PersonalInfo{
         this.mobileNo=x;
     }
 
-}
 
-class TwoWheeler extends Vehicle{
-   
-    TwoWheeler(){
-        this.wheeler="Two Wheeler";
+    public void setWheeler(int x){
+          if(x==1){
+              this.wheeler="Two Wheeler";
+          }
+          else if(x==2){
+             this.wheeler="Four Wheeler";
+          }
     }
-}
 
-class FourWheeler extends Vehicle{
+    public void setType(int x){
 
-    FourWheeler(){
-        this.wheeler="Four Wheeler";
+        if(this.wheeler=="Two Wheeler"){
+
+            if(x==1){
+                this.type="Bike";
+            }
+            else if(x==2){
+                this.type="Electric Bike";
+            }
+            else if(x==3){
+                this.type="Cycle";
+            }
+        }
+        else if(this.wheeler=="Four Wheeler"){
+            if(x==1){
+                this.type="Car";
+            }
+            else if(x==2){
+                this.type="Electric Car";
+            }
+            else if(x==3){
+                this.type="Truck";
+            }
+        }
     }
-}
 
-class Bike extends TwoWheeler{
-       
-    Bike(String s){
-        this.type="Bike";
-        this.vehicleNo=s;
+    void setVehicleNo(String x){
+        this.vehicleNo=x;
     }
+
 }
 
-class ElectricBike extends TwoWheeler{
-       
-    ElectricBike(String s){
-        this.type="Electric Bike";
-        this.vehicleNo=s;
-    }
-}
+class Message{
 
-class Cycle extends TwoWheeler{
-       
-    Cycle(){
-        this.type="Cycle";
-        this.vehicleNo="NONE";
-    }
-}
-
-class Car extends FourWheeler{
-
-    Car(String s){
-        this.type="Electric Bike";
-        this.vehicleNo=s;
-    }
-}
-
-class ElectricCar extends FourWheeler{
-       
-    ElectricCar(String s){
-        this.type="Electric Car";
-        this.vehicleNo=s;
-    }
-}
-
-class Truck extends FourWheeler{
-       
-    Truck(String s){
-        this.type="Truck";
-        this.vehicleNo=s;
+    void display1(ArrayList<Person> list){
+    
+           Scanner input= new Scanner(System.in);
+    
+            System.out.println("Enter :");
+            System.out.println("1 - Two Wheeler\n2 - Four Wheeler");
+    
+            int x=input.nextInt();
+            Person object =new Person();
+            list.add(object);
+            object.setWheeler(x);
+            if(x==1){
+                System.out.println("Select :");
+                System.out.println("1 - Bike\n2 - Electric Bike\n3 - Cycle");
+                
+                x=input.nextInt();
+                object.setType(x);
+    
+                if(x!=3){
+                    System.out.print("Please Enter Your Vehicle Number :");
+                    String s= input.next();
+                    object.setVehicleNo(s);
+                }
+                
+            }
+            else if(x==2){
+    
+                System.out.println("Select :");
+                System.out.println("1 - Car\n2 - Electric Car\n3 - Truck");
+                x=input.nextInt();
+                object.setType(x);
+                System.out.print("Please Enter Your Vehicle Number :");
+                String s= input.next();
+               object.setVehicleNo(s);  
+            }
+            input.close();
+            
+        
     }
 }
 
 
 public class Team6 {
 
-    public static void Display1(ArrayList<Vehicle> list){
-        
-        Scanner input= new Scanner(System.in);
 
-        System.out.println("Enter :");
-        System.out.println("1 - Two Wheeler\n2 - Four Wheeler");
-
-        int x=input.nextInt();
-
-        if(x==1){
-            System.out.println("Select :");
-            System.out.println("1 - Bike\n2 - Electric Bike\n3 - Cycle");
-            
-            x=input.nextInt();
-
-            if(x!=3){
-                System.out.print("Please Enter Your Vehicle Number :");
-                String s= input.next();
-
-                if(x==1){
-                    Vehicle object =new Bike(s);
-                    list.add(object);
-                }
-                else if(x==2){
-                    Vehicle object =new ElectricBike(s);
-                    list.add(object);
-                }
-
-            }
-            else if(x==3){
-                Vehicle object =new Cycle();
-                    list.add(object);
-            }
-
-        }
-        else if(x==2){
-
-            System.out.println("Select :");
-            System.out.println("1 - Car\n2 - Electric Car\n3 - Truck");
-            x=input.nextInt();
-            System.out.print("Please Enter Your Vehicle Number :");
-            String s= input.next();
-
-            if(x==1){
-                Vehicle object =new Car(s);
-                list.add(object);
-            }
-            else if(x==2){
-                Vehicle object =new ElectricCar(s);
-                list.add(object);
-            }
-            else if(x==3){
-                Vehicle object =new Truck(s);
-                list.add(object);
-            }
-        }
-        input.close();
-        
-    }
     public static void main(String[] args){
 
         Scanner input= new Scanner(System.in);
                 
-        ArrayList<Vehicle> list =new ArrayList<>();
+        ArrayList<Person> list =new ArrayList<>();
+
+        Message msg =new Message();
         
-        Display1(list);
+        msg.display1(list);
         input.close();
         System.out.println(list.get(0).type+" "+list.get(0).wheeler);
+        System.out.println(list.get(0).vehicleNo);
 
     }
 
