@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+
+
 class Message{
 
     void display1(ArrayList<Person> list){
